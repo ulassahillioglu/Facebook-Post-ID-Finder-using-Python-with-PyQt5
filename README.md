@@ -1,5 +1,5 @@
 # Facebook-Post-ID-Finder
-
+WARNING: This tool is used to scrape Post ID of Embedded, Album and Text posts. Posts with single Photo/Video will probably throw an error.
 
 A minimalistic PyQT5 application to gather ID of desired Facebook Post.
 
