@@ -1,4 +1,4 @@
-link = input("Enter the link : ")
+input_link = input("Enter the link : ")
 link = str(input_link).replace("www","m")
 res = rq.get(link)
 soup_data = bs(res.text, 'html.parser')
