@@ -46,6 +46,12 @@ class Ui_MainWindow(object):
         self.tb.setObjectName("tb")
         self.tb.setAcceptRichText(True)
         self.tb.setOpenExternalLinks(True)
+        self.label2 = QtWidgets.QLabel(self.centralwidget)
+        self.label2.setText("Enter FB Url")
+        self.label2.setGeometry(90,170,200,28)
+        font2 = QtGui.QFont()
+        font2.setPointSize(13)
+        self.label2.setFont(font2)
         
         
         MainWindow.setCentralWidget(self.centralwidget)
@@ -72,16 +78,16 @@ class Ui_MainWindow(object):
         concl = soup_data.find_all('div',{'class' : 'bo bp'})
 
         s = str(concl[0]).split(",")
-        global sonuc
-        sonuc = s[1]
+        global final_result
+        final_result = s[1]
         # msg = QMessageBox()
         # msg.setWindowTitle("Post ID")
-        # msg.setText(sonuc)
+        # msg.setText(final_result)
         # msg.setIcon(QMessageBox.Information)
         # msg.setStandardButtons(QMessageBox.Ok)
-        self.tb.append(sonuc)
+        self.tb.append(final_result)
         # x = msg.exec_()
-    def textpost(self): # Our alternative function to scrape ID from permalink Text Posts
+    def textpost(self): # Our alternative function to scrape ID from permalink Facebook Posts
         input_link = self.userinput.text()
         link = str(input_link).replace("www","m")
         res = rq.get(link)
@@ -89,15 +95,16 @@ class Ui_MainWindow(object):
         concl = soup_data.find_all('div',{'class' : 'bo bp'})
 
         s = str(concl[0]).split(",")
-        global sonuc
-        sonuc = s[2]
-        # msg = QMessageBox()  Uncomment this block if you wish to get the result inside Message Box
+        global final_result
+        final_result = s[2]
+        # # Uncomment this block if you wish to get the result inside Message Box using "Alternative" Button
+        # msg = QMessageBox()  
         # msg.setWindowTitle("Post ID")
-        # msg.setText(sonuc)
+        # msg.setText(final_result)
         # msg.setIcon(QMessageBox.Information)
         # msg.setStandardButtons(QMessageBox.Ok)
         # x = msg.exec_()
-        self.tb.append(sonuc) #Write the output to text browser
+        self.tb.append(final_result) #Write the output to text browser
     
         
         
@@ -118,6 +125,7 @@ class Ui_MainWindow(object):
         self.submit2.setText(_translate("MainWindow", "Alternative"))
         self.refresh.setText(_translate("MainWindow", "Refresh"))
         self.label.setText(_translate("MainWindow", "Post ID Finder"))
+        self.label2.setText(_translate("MainWindow","Enter FB Url"))
         self.tb.setText(_translate("MainWindow", ""))
 
 
