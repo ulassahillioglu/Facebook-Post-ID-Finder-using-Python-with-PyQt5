@@ -71,48 +71,48 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
     
     def embedpost(self): #Our function to scrape the Post ID from Facebook
-        input_link = self.userinput.text()
-        link = str(input_link).replace("www","m")
-        res = rq.get(link)
-        soup_data = bs(res.text, 'html.parser')
-        concl = soup_data.find_all('div',{'class' : 'bo bp'})
-
-        s = str(concl[0]).split(",")
-        global final_result
-        final_result = s[1]
-        # msg = QMessageBox()
-        # msg.setWindowTitle("Post ID")
-        # msg.setText(final_result)
-        # msg.setIcon(QMessageBox.Information)
-        # msg.setStandardButtons(QMessageBox.Ok)
-        self.tb.append(final_result)
-        # x = msg.exec_()
-    def textpost(self): # Our alternative function to scrape ID from permalink Facebook Posts
-        link = input("Link girin : ")
-        link = link.replace("www.","m.")
-        print(link)
         try:
+            input_link = self.userinput.text()
+            link = str(input_link).replace("www","m")
             res = rq.get(link)
-            print("The status code is ", res.status_code)
-            print("\n")
             soup_data = bs(res.text, 'html.parser')
-            print(soup_data)
-            print("\n")
+            concl = soup_data.find_all('div',{'class' : 'bo bp'})
+
+            s = str(concl[0]).split(",")
+            global final_result
+            final_result = s[1]
+            # msg = QMessageBox()
+            # msg.setWindowTitle("Post ID")
+            # msg.setText(final_result)
+            # msg.setIcon(QMessageBox.Information)
+            # msg.setStandardButtons(QMessageBox.Ok)
+            self.tb.append(final_result)
+            # x = msg.exec_()
+        except:
+            self.tb.append("Alternatif deneyin")
+    def textpost(self): # Our alternative function to scrape ID from permalink Facebook Posts
+        
+        try:
+            link = self.userinput.text()
+            link = link.replace("www.","m.")
+            res = rq.get(link)
+            soup_data = bs(res.text, 'html.parser')
             concl = soup_data.select("div.bo.bp")
 
     
             s = str(concl[0]).split(",")
-            print(s[0].split('"')[3]+ " : " + s[0].split('"')[5])
+            final_result = s[0].split('"')[3]+ " : " + s[0].split('"')[5]
+            # # Uncomment this block if you wish to get the result inside Message Box using "Alternative" Button
+            # msg = QMessageBox()  
+            # msg.setWindowTitle("Post ID")
+            # msg.setText(final_result)
+            # msg.setIcon(QMessageBox.Information)
+            # msg.setStandardButtons(QMessageBox.Ok)
+            # x = msg.exec_()
+            self.tb.append(final_result) #Write the output to text browser
         except Exception as exc:
-            print(exc)
-        # # Uncomment this block if you wish to get the result inside Message Box using "Alternative" Button
-        # msg = QMessageBox()  
-        # msg.setWindowTitle("Post ID")
-        # msg.setText(final_result)
-        # msg.setIcon(QMessageBox.Information)
-        # msg.setStandardButtons(QMessageBox.Ok)
-        # x = msg.exec_()
-        self.tb.append(final_result) #Write the output to text browser
+            self.tb.append(exc)
+        
     
         
         
