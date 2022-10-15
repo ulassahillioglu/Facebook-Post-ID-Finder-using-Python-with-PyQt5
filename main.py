@@ -92,10 +92,10 @@ class Ui_MainWindow(object):
         link = link.replace("www.","m.")
         print(link)
         try:
-            res = requests.get(link)
+            res = rq.get(link)
             print("The status code is ", res.status_code)
             print("\n")
-            soup_data = BeautifulSoup(res.text, 'html.parser')
+            soup_data = bs(res.text, 'html.parser')
             print(soup_data)
             print("\n")
             concl = soup_data.select("div.bo.bp")
