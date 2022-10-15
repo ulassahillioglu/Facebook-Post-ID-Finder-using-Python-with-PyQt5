@@ -88,15 +88,23 @@ class Ui_MainWindow(object):
         self.tb.append(final_result)
         # x = msg.exec_()
     def textpost(self): # Our alternative function to scrape ID from permalink Facebook Posts
-        input_link = self.userinput.text()
-        link = str(input_link).replace("www","m")
-        res = rq.get(link)
-        soup_data = bs(res.text, 'html.parser')
-        concl = soup_data.find_all('div',{'class' : 'bo bp'})
+        link = input("Link girin : ")
+        link = link.replace("www.","m.")
+        print(link)
+        try:
+            res = requests.get(link)
+            print("The status code is ", res.status_code)
+            print("\n")
+            soup_data = BeautifulSoup(res.text, 'html.parser')
+            print(soup_data)
+            print("\n")
+            concl = soup_data.select("div.bo.bp")
 
-        s = str(concl[0]).split(",")
-        global final_result
-        final_result = s[2]
+    
+            s = str(concl[0]).split(",")
+            print(s[0].split('"')[3]+ " : " + s[0].split('"')[5])
+        except Exception as exc:
+            print(exc)
         # # Uncomment this block if you wish to get the result inside Message Box using "Alternative" Button
         # msg = QMessageBox()  
         # msg.setWindowTitle("Post ID")
