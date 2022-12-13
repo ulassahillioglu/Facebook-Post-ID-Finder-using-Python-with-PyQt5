@@ -13,28 +13,47 @@ import html.parser
 import requests as rq
 from bs4 import BeautifulSoup as bs
 from PyQt5.QtWidgets import QMessageBox, QTextBrowser
+import re
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
 
 
 class Ui_MainWindow(object):
+    def __init__(self):
+        super().__init__()
+        
+    
     def setupUi(self, MainWindow):
+        
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 600)
+        MainWindow.setStyleSheet("background-color: lightblue;")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.submit1 = QtWidgets.QPushButton(self.centralwidget)
         self.submit1.setGeometry(QtCore.QRect(290, 290, 93, 28))
         self.submit1.setObjectName("Standart")
+        self.submit1.setStyleSheet("background-color: blue;color:white")
         
         self.submit2 = QtWidgets.QPushButton(self.centralwidget)
         self.submit2.setGeometry(QtCore.QRect(290, 370, 93, 28))
         self.submit2.setObjectName("Alternative")
-        
+        self.submit2.setStyleSheet("background-color: blue;color:White")
+
+        self.submit3 = QtWidgets.QPushButton(self.centralwidget)
+        self.submit3.setGeometry(QtCore.QRect(210, 450, 250, 28))
+        self.submit3.setObjectName("Emergency")
+        self.submit3.setStyleSheet("background-color: blue;color:white")
+
+
         self.userinput = QtWidgets.QLineEdit(self.centralwidget)
         self.userinput.setGeometry(QtCore.QRect(90, 200, 531, 41))
         self.userinput.setObjectName("userinput")
+        self.userinput.setStyleSheet("background-color: white;")
         self.refresh = QtWidgets.QPushButton(self.centralwidget)
         self.refresh.setGeometry(QtCore.QRect(290, 330, 93, 28))
         self.refresh.setObjectName("refresh")
+        self.refresh.setStyleSheet("background-color: gray;")
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(230, 70, 301, 71))
         font = QtGui.QFont()
@@ -46,6 +65,7 @@ class Ui_MainWindow(object):
         self.tb.setObjectName("tb")
         self.tb.setAcceptRichText(True)
         self.tb.setOpenExternalLinks(True)
+        self.tb.setStyleSheet("background-color: white;")
         self.label2 = QtWidgets.QLabel(self.centralwidget)
         self.label2.setText("Enter FB Url")
         self.label2.setGeometry(90,170,200,28)
@@ -65,6 +85,7 @@ class Ui_MainWindow(object):
         
         self.submit1.clicked.connect(self.embedpost)
         self.submit2.clicked.connect(self.textpost)
+        self.submit3.clicked.connect(self.emergency)
         self.refresh.clicked.connect(self.clear_text)
 
         self.retranslateUi(MainWindow)
@@ -111,7 +132,32 @@ class Ui_MainWindow(object):
             # x = msg.exec_()
             self.tb.append(final_result) #Write the output to text browser
         except Exception as exc:
-            self.tb.append(exc)
+            self.tb.append(str(exc))
+        
+    def emergency(self):
+            
+        try:
+            pattern = re.compile(r'(id)*\w{9,11}[:"][:"]\d{15,17}')
+            link = self.userinput.text()
+            res = rq.get(link)
+            soup_data = bs(res.text, 'html.parser')
+
+            global final_result
+            s = soup_data.prettify()
+
+            matches = pattern.finditer(s)
+
+            for match in matches:
+                if 'fbid' in match[0]:
+                    self.tb.append(match[0])
+                    
+                else:
+                    continue
+            
+                
+            # self.tb.append(final_result) #Write the output to text browser
+        except Exception as exc:
+            self.tb.append(str(exc))
         
     
         
@@ -131,6 +177,7 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.submit1.setText(_translate("MainWindow", "Standart"))
         self.submit2.setText(_translate("MainWindow", "Alternative"))
+        self.submit3.setText(_translate("MainWindow", "Emergency(Only use when needed)"))
         self.refresh.setText(_translate("MainWindow", "Refresh"))
         self.label.setText(_translate("MainWindow", "Post ID Finder"))
         self.label2.setText(_translate("MainWindow","Enter FB Url"))
