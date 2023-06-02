@@ -1,3 +1,5 @@
+IMPORTANT// This version is outdated and may not work as intended. Use at your own will. Updated version will arrive in future.
+
 # Facebook-Post-ID-Finder
 WARNING: This tool is used to scrape Post ID of Embedded, Album and Text posts. Posts with permalinks might throw an error!
 
