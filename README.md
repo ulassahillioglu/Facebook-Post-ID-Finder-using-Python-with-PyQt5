@@ -1,4 +1,4 @@
-# Facebook-Post-ID-Finder-using-Python-with-PyQt5-
+# Facebook-Post-ID-Finder-using-Python-with-PyQt5
 
 
 A Python script with a PyQt5 interface to find the numeric IDs of Facebook posts.
@@ -22,7 +22,7 @@ Before running the script, ensure that you have the following dependencies insta
 
 ## Usage
 
-1)You can clone the repository with git clone https://github.com/ulassahillioglu/Facebook-Post-ID-Finder-using-Python-with-PyQt5-.git
+1)You can clone the repository with git clone https://github.com/ulassahillioglu/Facebook-Post-ID-Finder-using-Python-with-PyQt5.git
 
 2)Install the requirements with pip install -r requirements.txt
 
