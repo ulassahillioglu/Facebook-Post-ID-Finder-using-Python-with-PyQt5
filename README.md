@@ -22,7 +22,7 @@ Before running the script, ensure that you have the following dependencies insta
 
 ## Usage
 
-1)You can clone the repository with git clone https://github.com/ulassahillioglu/Facebook-Post-ID-Finder-using-Python-with-PyQt5.git
+1)You can clone the repository with "git clone https://github.com/ulassahillioglu/Facebook-Post-ID-Finder-using-Python-with-PyQt5.git"
 
 2)Install the requirements with pip install -r requirements.txt
 
@@ -32,15 +32,19 @@ Before running the script, ensure that you have the following dependencies insta
 
 Enter the URL of the Facebook post in the input field.
 Click the "Extract" button.
+
 5)Script will return an adjusted URL for easy use. Numeric Post ID will come after '/posts/' section (e.g. https://www.facebook.com/{usernameOrUserId}/posts/{PostId}/)
 
-Contributing
+Contributing:
+
 Contributions are welcome! If you find any issues or have suggestions for improvements, please create an issue or submit a pull request.
 
-License
+License:
+
 This project is licensed under the MIT License.
 
-Acknowledgments
+Acknowledgments:
+
 Thanks to the PyQt5 developers for providing a powerful GUI toolkit for Python.
 Inspired by the need for a simple tool to find numeric IDs of Facebook posts.
 

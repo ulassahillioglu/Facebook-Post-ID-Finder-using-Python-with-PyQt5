@@ -12,6 +12,7 @@ class FacebookPostLinkExtractor:
         self.pattern5 = re.compile(r'fbid=(\w{15,16})')
         self.link_pattern = r'link href="https://www\.facebook\.com/[^/]+/posts/[^/]+/\d+/"'
         self.reel_pattern = r'link href="https://www\.facebook\.com/[^/]+/videos/[^/]+/\d+/"'
+        self.reel_pattern_2 = r'link href="https://www\.facebook\.com/[^/]+/videos/\d+/"'
         self.complete_link_pattern = r'https://www\.facebook\.com/(\w*)/posts/(\d*)/'
         self.long_pattern = r'https://www\.facebook\.com/[^/]+/posts/[^/]+/\d+/"'
         self.permalink_pattern = r'story_fbid=(\d+)'
@@ -83,6 +84,16 @@ class FacebookPostLinkExtractor:
             link3 = 'https://www.facebook.com/{}/videos/{}/'.format(link2[3], link2[6])
             result = link3
             return result
+        else:
+                match = re.search(self.reel_pattern_2, soup_data.prettify())
+                link = match.group()
+                link2 = link.strip('link href=').strip('"').split('/')
+                print(link2)
+                
+                link3 = 'https://www.facebook.com/{}/videos/{}/'.format(link2[3], link2[5])
+            
+                result = link3
+                return result
     
     def extract_post_link_from_watch(self, link):
         message = "This is a correct link, numeric ID is in the URL, process terminated."
