@@ -22,9 +22,16 @@ Before running the script, ensure that you have the following dependencies insta
 
 ## Usage
 
-1)You can clone the repository with "git clone https://github.com/ulassahillioglu/Facebook-Post-ID-Finder-using-Python-with-PyQt5.git"
+1)You can clone the repository with 
 
-2)Install the requirements with pip install -r requirements.txt
+```bash
+"git clone https://github.com/ulassahillioglu/Facebook-Post-ID-Finder-using-Python-with-PyQt5.git"
+```
+
+2)Install the requirements with 
+```bash
+pip install -r requirements.txt
+```
 
 3)Run the main.py
 
